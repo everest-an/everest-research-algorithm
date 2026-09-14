@@ -1,6 +1,6 @@
 ---
 name: elon-musk-5-step
-description: Elon Musk 五步工作法(The Algorithm)—— 质疑要求、删除、简化、加速、自动化,含未知领域模式、研发/实验运行原则、附加规则与适用边界。用于研发、方案、流程的评审与瘦身。Use when planning, reviewing, or simplifying any R&D process, design, feature, or workflow; when a process feels bloated; when working in unknown territory with no precedent; when running experiments or training runs and keeping throughput up; when deciding whether to build, delete, simplify, or automate something. Triggers - 五步工作法, 马斯克工作法, 算法, 方案评审, 流程瘦身, 研发评审, 该不该做, 能不能删, 要不要自动化, 未知领域, 没有先例, 凭什么, 第一性原理, 实验跑起来, 训练别停, 换方向, Musk algorithm, delete before optimize, requirements less dumb, best part is no part, unknown territory, no precedent, keep iterating, don't idle.
+description: Elon Musk 五步工作法(The Algorithm)—— 质疑要求、删除、简化、加速、自动化,含未知领域模式、研发/实验运行原则、RSI 闭环、附加规则与适用边界。用于研发、方案、流程的评审与瘦身。Use when planning, reviewing, or simplifying any R&D process, design, feature, or workflow; when a process feels bloated; when working in unknown territory with no precedent; when running experiments or training runs and keeping throughput up; when you need to verify that an improvement is actually real (RSI loop, frozen evaluator, promotion gate, rollback, lineage); when deciding whether to build, delete, simplify, or automate something. Triggers - 五步工作法, 马斯克工作法, 算法, 方案评审, 流程瘦身, 研发评审, 该不该做, 能不能删, 要不要自动化, 未知领域, 没有先例, 凭什么, 第一性原理, 实验跑起来, 训练别停, 换方向, RSI, 递归自我改进, 自我进化, 冻结评估器, 晋升门, 回滚, 血缘, Musk algorithm, delete before optimize, requirements less dumb, best part is no part, unknown territory, no precedent, keep iterating, don't idle, recursive self-improvement, frozen evaluator, promotion gate.
 license: MIT
 ---
 
@@ -132,6 +132,37 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 
 ---
 
+## RSI 闭环 · 让改进本身可验证
+
+*五步管"怎么决策",运行原则管"怎么保持推进",这一节管**"怎么确认改进是真的"**。*
+
+**闭环:**
+
+```
+提议 → 评估(冻结评估器) → 晋升门 → 保留 / 回滚 → 记录血缘 → 下一代
+```
+
+**七条硬规则:**
+
+1. **评估器不可改。** 改进者不能碰判分规则 —— 测试、门禁、反作弊、循环编排本身,全部冻结。**改得了裁判,分数就没有意义。**
+2. **留出集必须封存。** 搜索过程看不到最终测试。看得见的测试,迟早会被拟合。
+3. **没进晋升门,不算改进。** "我觉得变好了"不是证据。只有显式 gate 通过才算数,而且只有它能接受候选。
+4. **被拒的必须回滚。** 干净退回上一版,不留半成品 —— 半成品会让下一轮的基线不可信。
+5. **每代记血缘。** 谁改了哪、依据什么、结果如何,可追溯、可复现。没有血缘 = 复现不了 = 等于没发生。
+6. **失败要留下残渣,喂给下一轮。** 失败不是噪声,是下一轮的课程来源。拒绝理由要结构化留存,不是丢掉。
+7. **建与审分离。** 提议的人不给自己打分。条件允许就上红队对抗 —— 让另一双眼睛专门找茬。
+
+**判据:这一轮的改进,别人能复现吗?**
+- 能 → 它是真的
+- 不能 → 它只是你的感觉
+
+**和前面几节的关系(这三层是闭合的):**
+- 第 -1 步"假设可否证伪" → 冻结评估器就是这个判据的落地
+- 运行原则"失败变成下一轮输入" → 就是第 6 条失败残渣
+- 第 2 步"删到要加回 10%" → 留出集 + 回滚就是那个安全阀
+
+---
+
 ## 附加规则(让算法在团队里跑得动)
 
 *Musk 自己称这些为 corollaries。它们不是第 6 步,是前提。*
@@ -163,6 +194,7 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 [3 简化]    简化点:___
 [4 加速]    循环时间:___ → ___
 [5 自动化]  是否自动化:___           理由:___
+[RSI]       评估器冻结?___ 进晋升门?___ 血缘:___
 [下一轮]    这次跑完,下一步跑什么:___
 ```
 
@@ -172,7 +204,7 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 
 - **五步不是五等分。** 价值几乎全在前两步:前两步改的是"你在解哪道题",后三步只是把给定的题解得漂亮。九成人把力气花在后三步。
 - **它是循环,不是一次性流程。** 跑完第 5 步回到第 -1/0/1 步重来。SpaceX Raptor 1 → Raptor 3 就是这么迭代的。
-- **它不负责验证和安全兜底。** "10% 加回来"就是那个安全阀,但它依赖一个能反馈的闭环。
+- **它本身不负责验证和安全兜底** —— 这块由 RSI 闭环补上(冻结评估器 + 留出集 + 晋升门 + 回滚)。
 - **它需要授权。** Musk 能质疑任何要求,因为他是创始人。
 - **五步是"怎么建造",不是"怎么想问题"。** 在未知领域,第一性原理(第 -1 步)必须在最前面,因为第 1 步需要"要求"存在,而未知领域没有要求。
 - **"让设备一直跑"不等于不许停。** 局部可以停(一个方向该关就关),全局不停(总得有东西在跑)。
@@ -196,6 +228,11 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 | 设备空转 | 等上一组结果才排下一组 | 吞吐腰斩 |
 | 卡住就全员停 | 一个方向失败就干等 | 时间白流,团队熄火 |
 | 跑完没下一轮 | 实验做完没产出下一步假设 | 这次实验白跑 |
+| **改裁判** | 改测试 / 门禁让它通过 | **分数彻底失去意义** |
+| **看见测试** | 拿留出集反复调参 | 过拟合,上线就崩 |
+| **没进 gate 就宣称改进** | "我感觉变好了" | 自欺,无法复现 |
+| **不回滚** | 留下半成品和注释掉的代码 | 下一轮基线不可信 |
+| **建审同人** | 自己提议自己打分 | 盲区永远存在 |
 
 ## 一句话记忆
 
@@ -203,4 +240,7 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 删得不够狠,说明你还没开始。
 
 **跑起来别停:一个方向不行就换一个 —— 但别让设备空着。**
+
+**改得了裁判,分数就没有意义。**
+
 在未知领域,先问一句:**凭什么你认为是对的?**
