@@ -1,6 +1,6 @@
 ---
 name: elon-musk-5-step
-description: Elon Musk 五步工作法(The Algorithm)—— 质疑要求、删除、简化、加速、自动化,含未知领域模式、附加规则与适用边界。用于研发、方案、流程的评审与瘦身。Use when planning, reviewing, or simplifying any R&D process, design, feature, or workflow; when a process feels bloated; when working in unknown territory with no precedent; when deciding whether to build, delete, simplify, or automate something. Triggers - 五步工作法, 马斯克工作法, 算法, 方案评审, 流程瘦身, 研发评审, 该不该做, 能不能删, 要不要自动化, 未知领域, 没有先例, 凭什么, 第一性原理, Musk algorithm, delete before optimize, requirements less dumb, best part is no part, unknown territory, no precedent.
+description: Elon Musk 五步工作法(The Algorithm)—— 质疑要求、删除、简化、加速、自动化,含未知领域模式、研发/实验运行原则、附加规则与适用边界。用于研发、方案、流程的评审与瘦身。Use when planning, reviewing, or simplifying any R&D process, design, feature, or workflow; when a process feels bloated; when working in unknown territory with no precedent; when running experiments or training runs and keeping throughput up; when deciding whether to build, delete, simplify, or automate something. Triggers - 五步工作法, 马斯克工作法, 算法, 方案评审, 流程瘦身, 研发评审, 该不该做, 能不能删, 要不要自动化, 未知领域, 没有先例, 凭什么, 第一性原理, 实验跑起来, 训练别停, 换方向, Musk algorithm, delete before optimize, requirements less dumb, best part is no part, unknown territory, no precedent, keep iterating, don't idle.
 license: MIT
 ---
 
@@ -104,6 +104,34 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 
 ---
 
+## 研发 / 实验运行原则 · 让设备一直跑
+
+*五步管"怎么决策",这一条管"怎么保持推进"。做研发和实验的时候用。*
+
+**核心:永远有东西在跑。**
+
+- **设备 / 算力不空转。** 训练尽量不要停,实验台尽量不要空。让下一组实验在上一组还没出结果时就排上 —— **排队等结论是最大的浪费。**
+- **一个方向不行 → 换方向,不要停。** 卡住不是停工的理由,是换路的信号。
+- **卡住时三选一,但别选"等着":**
+
+| 出路 | 做什么 |
+|---|---|
+| **换方向** | 试另一条路径 / 另一组参数 / 另一个假设 |
+| **定位问题** | 分层排查:到底是哪一环错了?找到真正那一层 |
+| **修,再试** | 修完立刻重跑,别让"修"变成新的等待 |
+
+- **失败必须变成下一轮的输入。** 一次实验跑完,必须产出"下一次跑什么"。跑完没有下一轮 = 白跑。
+- **并行优先,串行是最后手段。** 能同时跑的方向就同时跑,顺序试是没办法才用。
+
+**和"别在坑里加速"不冲突:**
+- "别在坑里加速" = 别在**同一条错路**上更快
+- 这条 = 别让**整体的实验吞吐**掉下来
+- 判定一个方向是坑 → **关掉它,把资源移到别的方向**,不是停下来
+
+**反直觉的点:** "停下来想清楚"常常是拖延的高级形式。正确姿势是**让实验继续跑着,同时想** —— 想和跑并行,不是先后。真的需要停,也只能局部停,不能全局停。
+
+---
+
 ## 附加规则(让算法在团队里跑得动)
 
 *Musk 自己称这些为 corollaries。它们不是第 6 步,是前提。*
@@ -135,6 +163,7 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 [3 简化]    简化点:___
 [4 加速]    循环时间:___ → ___
 [5 自动化]  是否自动化:___           理由:___
+[下一轮]    这次跑完,下一步跑什么:___
 ```
 
 ---
@@ -146,6 +175,7 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 - **它不负责验证和安全兜底。** "10% 加回来"就是那个安全阀,但它依赖一个能反馈的闭环。
 - **它需要授权。** Musk 能质疑任何要求,因为他是创始人。
 - **五步是"怎么建造",不是"怎么想问题"。** 在未知领域,第一性原理(第 -1 步)必须在最前面,因为第 1 步需要"要求"存在,而未知领域没有要求。
+- **"让设备一直跑"不等于不许停。** 局部可以停(一个方向该关就关),全局不停(总得有东西在跑)。
 
 ---
 
@@ -163,9 +193,14 @@ Musk 自己承认过:"造 Model 3 时,我真的是先自动化、再加速、再
 | 无署名要求 | "上面要求的" | 无人负责,无法质疑 |
 | 在坑里加速 | 流程没理清就催进度 | 加速灾难 |
 | 过早自动化 | 流程还在变就上工具 | 固化错误 |
+| 设备空转 | 等上一组结果才排下一组 | 吞吐腰斩 |
+| 卡住就全员停 | 一个方向失败就干等 | 时间白流,团队熄火 |
+| 跑完没下一轮 | 实验做完没产出下一步假设 | 这次实验白跑 |
 
 ## 一句话记忆
 
 **参照系 → 目标 → 质疑 → 删除 → 简化 → 加速 → 自动化**
 删得不够狠,说明你还没开始。
+
+**跑起来别停:一个方向不行就换一个 —— 但别让设备空着。**
 在未知领域,先问一句:**凭什么你认为是对的?**
